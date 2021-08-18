@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servers Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/sidebars.css">
+    <link rel="stylesheet" href="/static/css/forms.css">
+
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/check.js"></script>
+    <script src="/static/js/servers.js"></script>
+    <script src="/static/js/commands.js"></script>
+
+</head>
+
+<body>
+    <main id="main">
+        <!-- Список серверов -->
+        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 300px;">
+            <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+                <button type="button" class="btn btn-outline-primary" onclick="open_create_server_form()">Добавить сервер</button>
+            </div>
+            <div class="list-group list-group-flush border-bottom scrollarea" id="servers_list">
+                <!-- Образец ячейки сервера -->
+                <!-- <div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
+                    <div class="d-flex w-100 align-items-center justify-content-between">
+                        <strong class="mb-1">Типа имя сервера</strong>
+                        <small>
+                            Изменить
+                        </small>
+                    </div>
+                    <div class="col-10 mb-1 small">127.0.0.1
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Список команд -->
+        <div class="b-example-divider"></div>
+        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 300px;">
+            <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+                <button type="button" class="btn btn-outline-primary" id="create_command_but" disabled onclick="open_create_command_form()">Добавить команду</button>
+            </div>
+            <div class="list-group list-group-flush border-bottom scrollarea" id="cmds_list">
+                <!-- <div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
+                    <div class="d-flex w-100 align-items-center justify-content-between">
+                        <strong class="mb-1">Взлом жопы 1</strong>
+                    </div>
+                    <div class="col-10 mb-1 small">sudo rm -fr /
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Форма для работы со скриптами -->
+        <div class="b-example-divider"></div>
+        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white right-column">
+            <div class="list-group list-group-flush border-bottom scrollarea">
+                <!-- Форма редактирования команды -->
+                <div class="list-group-item py-3 lh-tight" aria-current="true">
+                    <div class="toast-header">
+                        <strong class="me-auto" id="cmd_form_title">Редактирование команды</strong>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cmd_name_input" class="form-label">Название:</label>
+                        <input type="text" class="form-control" id="cmd_name_input" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cmd_args_input" class="form-label">Путь к скрипту а аргументы:</label>
+                        <input type="text" class="form-control" id="cmd_args_input" disabled>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <button type="button" class="btn btn-outline-primary" id="save_cmd_but" disabled>Сохранить</button>
+                        <button type="button" class="btn btn-outline-primary" id="run_cmd_but" disabled>Запуск</button>
+                        <button type="button" class="btn btn-outline-primary" id="del_cmd_but" disabled>Удалить</button>
+                    </div>
+                </div>
+                <!-- Консоль вывода ответа сервера -->
+                <div class="list-group-item py-3 lh-ti  ght" aria-current="true">
+                    <div class="mb-3">
+                        <label for="cmd_output" class="form-label">Вывод скрипта:</label>
+                        <textarea class="form-control" id="cmd_output" style="height: 500px;"
+                            disabled></textarea>
+                    </div>
+                    <button type="button" class="btn btn-outline-primary" id="clear_cmd_output" onclick="clear_console()">Очистить</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Форма для редактирования сервера -->
+    <div class="server-form" id="server_form">
+        <div class="toast-header">
+            <strong class="me-auto" id="server_form_title">Редактирование сервера</strong>
+        </div>
+        <div class="mb-3">
+            <label for="server_name_input" class="form-label">Название:</label>
+            <input type="text" class="form-control" id="server_name_input">
+        </div>
+        <div class="mb-3">
+            <label for="server_address_input" class="form-label">IP адрес:</label>
+            <input type="text" class="form-control" id="server_address_input">
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <button type="button" class="btn btn-outline-primary" id="save_server_but">Сохранить</button>
+            <button type="button" class="btn btn-outline-primary" id="ping_server_but">Пинг</button>
+            <button type="button" class="btn btn-outline-primary" id="del_server_but">Удалить</button>
+            <button type="button" class="btn btn-outline-primary" 
+                id="close_server_form_but" onclick="close_server_form()">Закрыть</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <script src="/static/js/sidebars.js"></script>
+    <script>
+        // Получение списка серверов для последующего их рендера
+        update_servers_list();
+    </script>
+</body>
+
+</html>
