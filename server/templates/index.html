@@ -23,7 +23,8 @@
         <!-- Список серверов -->
         <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 300px;">
             <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-                <button type="button" class="btn btn-outline-primary" onclick="open_create_server_form()">Добавить сервер</button>
+                <button type="button" class="btn btn-outline-primary" onclick="open_create_server_form()">Добавить
+                    сервер</button>
             </div>
             <div class="list-group list-group-flush border-bottom scrollarea" id="servers_list">
                 <!-- Образец ячейки сервера -->
@@ -44,7 +45,8 @@
         <div class="b-example-divider"></div>
         <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 300px;">
             <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-                <button type="button" class="btn btn-outline-primary" id="create_command_but" disabled onclick="open_create_command_form()">Добавить команду</button>
+                <button type="button" class="btn btn-outline-primary" id="create_command_but" disabled
+                    onclick="open_create_command_form()">Добавить команду</button>
             </div>
             <div class="list-group list-group-flush border-bottom scrollarea" id="cmds_list">
                 <!-- <div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
@@ -75,7 +77,10 @@
                         <input type="text" class="form-control" id="cmd_args_input" disabled>
                     </div>
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-outline-primary" id="save_cmd_but" disabled>Сохранить</button>
+                        <button type="button" class="btn btn-outline-primary" id="save_cmd_but"
+                            disabled>Сохранить</button>
+                        <button type="button" class="btn btn-outline-primary" id="save_new_cmd" disabled>Сохранить как
+                            новый</button>
                         <button type="button" class="btn btn-outline-primary" id="run_cmd_but" disabled>Запуск</button>
                         <button type="button" class="btn btn-outline-primary" id="del_cmd_but" disabled>Удалить</button>
                     </div>
@@ -84,10 +89,16 @@
                 <div class="list-group-item py-3 lh-ti  ght" aria-current="true">
                     <div class="mb-3">
                         <label for="cmd_output" class="form-label">Вывод скрипта:</label>
-                        <textarea class="form-control" id="cmd_output" style="height: 500px;"
-                            disabled></textarea>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="clear_output_check" checked>
+                            <label class="form-check-label" for="clear_output_check">
+                                Очищать при запуске скрипта
+                            </label>
+                        </div>
+                        <textarea class="form-control" id="cmd_output" style="height: 500px;" disabled></textarea>
                     </div>
-                    <button type="button" class="btn btn-outline-primary" id="clear_cmd_output" onclick="clear_console()">Очистить</button>
+                    <button type="button" class="btn btn-outline-primary" id="clear_cmd_output"
+                        onclick="clear_console()">Очистить</button>
                 </div>
             </div>
         </div>
@@ -110,8 +121,8 @@
             <button type="button" class="btn btn-outline-primary" id="save_server_but">Сохранить</button>
             <button type="button" class="btn btn-outline-primary" id="ping_server_but">Пинг</button>
             <button type="button" class="btn btn-outline-primary" id="del_server_but">Удалить</button>
-            <button type="button" class="btn btn-outline-primary" 
-                id="close_server_form_but" onclick="close_server_form()">Закрыть</button>
+            <button type="button" class="btn btn-outline-primary" id="close_server_form_but"
+                onclick="close_server_form()">Закрыть</button>
         </div>
     </div>
 

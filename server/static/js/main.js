@@ -141,7 +141,8 @@ function open_create_command_form(){
     document.getElementById("save_cmd_but").onclick = function(){
         create_new_command();
     };
-    document.getElementById("save_cmd_but").disabled = false;   
+    document.getElementById("save_cmd_but").disabled = false; 
+    document.getElementById("save_new_cmd").disabled = true;
 }
 
 function open_change_command_form(element, id, name, args){
@@ -172,7 +173,12 @@ function open_change_command_form(element, id, name, args){
     document.getElementById("save_cmd_but").onclick = function(){
         change_command(id);
     };
-    document.getElementById("save_cmd_but").disabled = false;    
+    document.getElementById("save_cmd_but").disabled = false;
+    
+    document.getElementById("save_new_cmd").onclick = function(){
+        create_new_command();
+    };
+    document.getElementById("save_new_cmd").disabled = false;  
 }
 
 function close_command_form(){
@@ -185,6 +191,8 @@ function close_command_form(){
 
     document.getElementById("cmd_name_input").disabled = true;
     document.getElementById("cmd_args_input").disabled = true;
+
+    document.getElementById("save_new_cmd").disabled = true;
 }
 
 // Удаление списка команд и отключение формы ввода команды

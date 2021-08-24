@@ -141,7 +141,12 @@ function run_command(){
         if (request.readyState === 4){
             if (request.status === 200){
                 data = JSON.parse(request.responseText);
-                console.log(data);
+                // console.log(data);
+                var check = document.getElementById("clear_output_check");
+                if (check.checked){
+                    document.getElementById("cmd_output").value = `(${data.server_name}|${data.server_address})> ${data.output}`;
+                    return
+                }
                 document.getElementById("cmd_output").value += `\n(${data.server_name}|${data.server_address})> ${data.output}`;
             } else {
                 data = JSON.parse(request.responseText);
