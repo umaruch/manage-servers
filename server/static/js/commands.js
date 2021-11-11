@@ -154,7 +154,7 @@ function run_command(){
                     document.getElementById("cmd_output").value = `${data.server_name}: ${get_current_datetime()} > ${data.output}`;
                     return
                 }
-                document.getElementById("cmd_output").value += `\n${data.server_name}: ${get_current_datetime()} > ${data.output}`;
+                document.getElementById("cmd_output").value += `${data.server_name}: ${get_current_datetime()} > ${data.output}`;
             } else {
                 data = JSON.parse(request.responseText);
                 alert(data.error);

@@ -213,14 +213,7 @@ function render_blank_commands(){
 // Получение текущих даты и времени
 function get_current_datetime(){
     var now = new Date();
-    var day = now.getDate();
-    var month = now.getMonth()+1;
-    var year = now.getFullYear();
-    var hours = now.getHours();
-    var mins = now.getMinutes();
-    var secs = now.getSeconds();
-
-    return `${day}.${month}.${year} ${hours}:${mins}:${secs}`;
+    return now.toLocaleString("ru");
 }
 
 // Полная очистка вывода в консоли
