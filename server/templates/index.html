@@ -21,7 +21,7 @@
 <body>
     <main id="main">
         <!-- Список серверов -->
-        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 300px;">
+        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 240px;">
             <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
                 <button type="button" class="btn btn-outline-primary" onclick="open_create_server_form()">Добавить
                     сервер</button>
@@ -43,7 +43,7 @@
 
         <!-- Список команд -->
         <div class="b-example-divider"></div>
-        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 300px;">
+        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 500px;">
             <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
                 <button type="button" class="btn btn-outline-primary" id="create_command_but" disabled
                     onclick="open_create_command_form()">Добавить команду</button>
@@ -73,7 +73,11 @@
                         <input type="text" class="form-control" id="cmd_name_input" disabled>
                     </div>
                     <div class="mb-3">
-                        <label for="cmd_args_input" class="form-label">Путь к скрипту а аргументы:</label>
+                        <label for="cmd_script_input" class="form-label">Путь к скрипту:</label>
+                        <input type="text" class="form-control" id="cmd_script_input" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cmd_args_input" class="form-label">Аргументы:</label>
                         <input type="text" class="form-control" id="cmd_args_input" disabled>
                     </div>
                     <div class="btn-group" role="group" aria-label="Basic outlined example">

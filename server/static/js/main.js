@@ -65,7 +65,7 @@ function render_servers_list(servers_list){
 
         // Кнопка редактирования
         let change_server_but = document.createElement("small");
-        change_server_but.innerText = "Изменить";
+        change_server_but.innerText = "Изм.";
         change_server_but.className = "clickable";
         change_server_but.setAttribute("onclick",
             `open_change_server_info_form(${server.id}, '${server.address}', '${server.name}')`);
@@ -106,6 +106,7 @@ function render_commands(cmds){
         // Имя сервера
         let name_strong = document.createElement("strong");
         name_strong.innerText = cmd.name;
+
         name_strong.className = "mb-1";
 
         cmd_name_div.appendChild(name_strong);
@@ -113,7 +114,8 @@ function render_commands(cmds){
 
         // Аргументы команды
         let address_div = document.createElement("div");
-        address_div.innerText = cmd.args;
+        let args = cmd.args.split(' ').slice(1).join(' ');
+        address_div.innerText = args;
         address_div.className = "col-10 mb-1 small";
 
         div.appendChild(address_div);
@@ -126,8 +128,10 @@ function open_create_command_form(){
     document.getElementById("cmd_form_title").innerText = "Создание команды";
 
     document.getElementById("cmd_name_input").disabled = false;
+    document.getElementById("cmd_script_input").disabled = false;
     document.getElementById("cmd_args_input").disabled = false;
     document.getElementById("cmd_name_input").value = "";
+    document.getElementById("cmd_script_input").value = "";
     document.getElementById("cmd_args_input").value = "";
 
     document.getElementById("del_cmd_but").disabled = true;
@@ -153,12 +157,15 @@ function open_change_command_form(element, id, name, args){
     current_command_div.classList.add("active");
 
     document.getElementById("cmd_name_input").disabled = false;
+    document.getElementById("cmd_script_input").disabled = false;
     document.getElementById("cmd_args_input").disabled = false;
 
     document.getElementById("cmd_form_title").innerText = "Редактирование команды";
 
+    var data = args.split(" ");
     document.getElementById("cmd_name_input").value = name;
-    document.getElementById("cmd_args_input").value = args;
+    document.getElementById("cmd_script_input").value = data[0];
+    document.getElementById("cmd_args_input").value = data.slice(1).join(" ");
 
     document.getElementById("run_cmd_but").onclick = function(){
         run_command();
@@ -183,6 +190,7 @@ function open_change_command_form(element, id, name, args){
 
 function close_command_form(){
     document.getElementById("cmd_name_input").value = "";
+    document.getElementById("cmd_script_input").value = "";
     document.getElementById("cmd_args_input").value = "";
 
     document.getElementById("run_cmd_but").disabled = true;
@@ -190,6 +198,7 @@ function close_command_form(){
     document.getElementById("save_cmd_but").disabled = true;
 
     document.getElementById("cmd_name_input").disabled = true;
+    document.getElementById("cmd_script_input").disabled = true;
     document.getElementById("cmd_args_input").disabled = true;
 
     document.getElementById("save_new_cmd").disabled = true;
@@ -199,6 +208,19 @@ function close_command_form(){
 function render_blank_commands(){
     document.getElementById("create_command_but").disabled = true;
     document.getElementById("cmds_list").innerHTML = "";
+}
+
+// Получение текущих даты и времени
+function get_current_datetime(){
+    var now = new Date();
+    var day = now.getDate();
+    var month = now.getMonth()+1;
+    var year = now.getFullYear();
+    var hours = now.getHours();
+    var mins = now.getMinutes();
+    var secs = now.getSeconds();
+
+    return `${day}.${month}.${year} ${hours}:${mins}:${secs}`;
 }
 
 // Полная очистка вывода в консоли

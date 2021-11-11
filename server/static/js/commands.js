@@ -38,7 +38,10 @@ function load_server_commands(server_element, server_id, server_name){
 // Создание новой команды
 function create_new_command(){
     let command_name = document.getElementById("cmd_name_input").value;
+    let script = document.getElementById("cmd_script_input").value;
     let command_args = document.getElementById("cmd_args_input").value;
+    let args = [script, command_args].join(" ");
+    console.log(args);
 
     const request = new XMLHttpRequest();
     request.open(
@@ -62,15 +65,17 @@ function create_new_command(){
     request.send(JSON.stringify({
         server_id: current_server_id,
         name: command_name,
-        args: command_args
+        args: args
     }));
 }
 
 // Изменение выбранной команды
 function change_command(command_id){
     let command_name = document.getElementById("cmd_name_input").value;
+    let script = document.getElementById("cmd_script_input").value;
     let command_args = document.getElementById("cmd_args_input").value;
-
+    let args = [script, command_args].join(" ");
+    console.log(args);
     const request = new XMLHttpRequest();
     request.open(
         "POST",
@@ -99,7 +104,7 @@ function change_command(command_id){
     request.send(JSON.stringify({
         server_id: current_server_id,
         name: command_name,
-        args: command_args
+        args: args
     }));
 }
 
@@ -126,7 +131,9 @@ function delete_command(command_id){
 
 // Воспроизведение команды
 function run_command(){
+    let script = document.getElementById("cmd_script_input").value;
     let command_args = document.getElementById("cmd_args_input").value;
+    let args = [script, command_args].join(" ");
 
     const request = new XMLHttpRequest();
     request.open(
@@ -144,10 +151,10 @@ function run_command(){
                 // console.log(data);
                 var check = document.getElementById("clear_output_check");
                 if (check.checked){
-                    document.getElementById("cmd_output").value = `(${data.server_name}|${data.server_address})> ${data.output}`;
+                    document.getElementById("cmd_output").value = `${data.server_name}: ${get_current_datetime()} > ${data.output}`;
                     return
                 }
-                document.getElementById("cmd_output").value += `\n(${data.server_name}|${data.server_address})> ${data.output}`;
+                document.getElementById("cmd_output").value += `\n${data.server_name}: ${get_current_datetime()} > ${data.output}`;
             } else {
                 data = JSON.parse(request.responseText);
                 alert(data.error);
@@ -157,6 +164,6 @@ function run_command(){
 
     request.send(JSON.stringify({
         server_id: current_server_id,
-        args: command_args
+        args: args
     }));   
 }
